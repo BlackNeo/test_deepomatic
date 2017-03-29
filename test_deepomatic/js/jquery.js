@@ -29,6 +29,7 @@ $(document).ready(function(){
                 },
                 data: '{"base64":"'+base64+'"}',
                 success: function(data) {
+                alert("Get Task Id :" + data)    
                 console.log(data);
                 },
                 error : function(jqXHR, textStatus) {
