@@ -38,7 +38,5 @@ $(document).ready(function(){
             alert( "Request failed: " + textStatus +"\njqXHR : " + jqXHR);
             console.log(jqXHR);
         });
-    });
-   
-   
+    });   
 });
