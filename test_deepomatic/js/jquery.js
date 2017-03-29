@@ -29,8 +29,9 @@ $(document).ready(function(){
                 },
                 data: '{"base64":"'+base64+'"}',
                 success: function(data) {
-                alert("Get Task Id :" + data)    
+                alert("Get Task Id :" + data);    
                 console.log(data);
+                result.html("I got my task Id");
                 },
                 error : function(jqXHR, textStatus) {
                 alert( "Request failed: " + textStatus +"\njqXHR : " + jqXHR);
