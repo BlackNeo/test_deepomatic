@@ -14,22 +14,24 @@ $(document).ready(function(){
             url: "https://api.deepomatic.com/v0.6/detect/fashion/",
             type: "POST",
             crossDomain: true,
-            dataType: 'base64',
+            dataType: 'json',
             cache: false,
             beforeSend: function(xhr){
                 xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-                xhr.setRequestHeader("Content-Length",base64.length);
+                xhr.setRequestHeader("Content-Lenght",base64.length);
             },
             headers: {
+                "Content-Type":"application/json",
                 "x-api-key": "b01a86463f6e4d58978da77b912d7fa5",
-                "x-app-id": "283723326633"
+                "x-app-id": "283723326633",
+                //"Content-Lenght": base64.length
             },
             data: {                
-                "base64":base64, "task_id" : 1234
+                "base64":base64 
             }
           });
         request.done(function(data) {
-            $(".base64").load("https://api.deepomatic.com/v0.6/detect/fashion/")
+            alert( data );
         });        
         request.fail(function(jqXHR, textStatus) {
             alert( "Request failed: " + textStatus +"\njqXHR : " + jqXHR);
