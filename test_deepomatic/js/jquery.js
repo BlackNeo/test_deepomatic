@@ -11,32 +11,30 @@ $(document).ready(function(){
    upload.on('load', function(){
         var base64 = $(this).attr('ng-src');
         var request = $.ajax({
-            url: "https://api.deepomatic.com/v0.6/detect/fashion/",
-            type: "POST",
-            crossDomain: true,
-            dataType: 'json',
-            cache: false,
-            beforeSend: function(xhr){
-                xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-                //xhr.setRequestHeader("Content-Length",base64.length);
-            },
-            headers: {
-                "Content-Type":"application/x-www-form-urlencoded",
-                "x-api-key": "b01a86463f6e4d58978da77b912d7fa5",
-                "x-app-id": "283723326633",
-                //"Content-Length": base64.length,
-                //"Authorization": "OAuth api_key=ACCESSTOKEN"
-            },
-            data: {                
-                "base64":base64 
+                url: "https://api.deepomatic.com/v0.6/detect/fashion/",
+                type: "POST",
+                crossDomain: true,
+                dataType: 'json',
+                cache: false,
+                beforeSend: function(xhr){
+                    xhr.setRequestHeader("Content-Type","application/json");
+                    //xhr.setRequestHeader("Content-Length",base64.length);
+                },
+                headers: {
+                    "Content-Type":"application/json",
+                    "x-app-id": "283723326633",
+                    "x-api-key": "b01a86463f6e4d58978da77b912d7fa5",
+                    //"Content-Length": base64.length,
+                    //"Authorization": "OAuth api_key=ACCESSTOKEN"
+                },
+                data: '{"base64":"'+base64+'"}',
+                success: function(data) {
+                console.log(data);
+                },
+                error : function(jqXHR, textStatus) {
+                alert( "Request failed: " + textStatus +"\njqXHR : " + jqXHR);
+                console.log(jqXHR);
             }
-          });
-        request.done(function(data) {
-            alert( data );
-        });        
-        request.fail(function(jqXHR, textStatus) {
-            alert( "Request failed: " + textStatus +"\njqXHR : " + jqXHR);
-            console.log(jqXHR);
         });
     });   
 });
