@@ -18,20 +18,36 @@ $(document).ready(function(){
                 cache: false,
                 beforeSend: function(xhr){
                     xhr.setRequestHeader("Content-Type","application/json");
-                    //xhr.setRequestHeader("Content-Length",base64.length);
                 },
                 headers: {
-                    "Content-Type":"application/json",
                     "x-app-id": "283723326633",
-                    "x-api-key": "b01a86463f6e4d58978da77b912d7fa5",
-                    //"Content-Length": base64.length,
-                    //"Authorization": "OAuth api_key=ACCESSTOKEN"
+                    "x-api-key": "b01a86463f6e4d58978da77b912d7fa5"
                 },
                 data: '{"base64":"'+base64+'"}',
                 success: function(data) {
-                alert("Get Task Id :" + data);    
-                console.log(data);
-                result.html("I got my task Id");
+//                    console.log(data);
+                            var task = JSON.stringify(data['task_id']);
+                            task = task.replace(/"/g, "");
+                                    $.ajax({
+                                    url: 'https://api.deepomatic.com/v0.6/tasks/'+task,
+                                    type: "GET",
+                                    crossDomain: true,
+                                    dataType: 'json',
+                                    beforeSend: function(xhr){
+                                        xhr.setRequestHeader("Content-Type","application/json");
+                                    },
+                                    headers: {
+                                        "x-app-id": "283723326633",
+                                        "x-api-key": "b01a86463f6e4d58978da77b912d7fa5"
+                                    },
+                                    success: function(data) {
+                                        alert('OK Status' + data);
+                                        console.log(data);
+                                    },
+                                    error : function(jqXHR, textStatus) {
+                                    alert( "Request failed: " + textStatus +"\njqXHR : " + jqXHR);
+                                }
+                            });
                 },
                 error : function(jqXHR, textStatus) {
                 alert( "Request failed: " + textStatus +"\njqXHR : " + jqXHR);
