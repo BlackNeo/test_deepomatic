@@ -10,6 +10,8 @@ $(document).ready(function(){
    
    upload.on('load', function(){
         var base64 = $(this).attr('ng-src');
+	base64 = base64.replace("data:image/jpeg;base64,", "");
+	console.log(base64);
         var request = $.ajax({
                 url: "https://api.deepomatic.com/v0.6/detect/fashion/",
                 type: "POST",
